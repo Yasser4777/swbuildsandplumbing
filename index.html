@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SW Builds & Plumbing - Expert Plumbing, Bathroom & Kitchen Refurb, Loft Conversions & Extensions</title>
+  <meta name="description" content="SW Builds & Plumbing - Specialists in plumbing, bathroom refurbishments, kitchen refurbishments, loft conversions, and home extensions. 25+ years experience across the Southwest." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* --- Basic reset --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+
+    /* Top bar */
+    .top-bar {
+      background: #111827;
+      color: white;
+      font-size: 0.85rem;
+      padding: 0.4rem 0;
+    }
+    .top-bar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .emergency-phone {
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: #dc2626;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.9; }
+    }
+    .emergency-phone:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+      transition: all 0.2s;
+    }
+
+    /* Header */
+    header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.1);
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1f2937;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo img {
+      height: 5rem;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      max-height: 5rem;
+    }
+    .logo-text {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      white-space: nowrap;
+    }
+    nav {
+      display: none;
+    }
+    nav a {
+      margin-left: 1rem;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+    nav a:hover {
+      color: #0ea5e9;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 50 L100 50" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></svg>');
+      opacity: 0.3;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #e5e7eb;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .button-secondary {
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+    .button-secondary:hover {
+      background: white;
+      color: #0f172a;
+    }
+    .hero-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #dc2626;
+      border: 2px solid #dc2626;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .hero-phone:hover {
+      background: #b91c1c;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+    }
+
+    .button-primary {
+      border: none;
+      background: #dc2626;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+    .button-primary:hover {
+      background: #b91c1c;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    }
+    
+    /* About section */
+    .about-section {
+      background: white;
+    }
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    .about-text h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #4b5563;
+      margin-bottom: 1rem;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 1.5rem;
+      background: #f9fafb;
+      border-radius: 0.75rem;
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #dc2626;
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-top: 0.5rem;
+    }
+    
+    /* Certifications */
+    .certs-section {
+      background: #f9fafb;
+    }
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      align-items: center;
+    }
+    .cert-item {
+      text-align: center;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+    }
+    .cert-item h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 1rem;
+      color: #111827;
+    }
+
+    /* Services section */
+    .section {
+      padding: 3rem 0;
+    }
+    .section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .section p.section-subtitle {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-bottom: 1.25rem;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .service-card {
+      background: white;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      border: 1px solid #e5e7eb;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: block;
+      cursor: pointer;
+    }
+    a.service-card {
+      text-decoration: none;
+      color: inherit;
+    }
+    .service-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .service-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #111827;
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+
+    /* Why choose us section */
+    .why-section {
+      background: white;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .feature-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .feature-icon {
+      width: 3rem;
+      height: 3rem;
+      background: #0ea5e9;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.5rem;
+    }
+    .feature-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .feature-content p {
+      font-size: 0.9rem;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+
+    /* Testimonials */
+    .testimonials-section {
+      background: #f9fafb;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .testimonial-card {
+      background: white;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      border: 1px solid #e5e7eb;
+    }
+    .testimonial-stars {
+      color: #fbbf24;
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: #374151;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    .testimonial-author {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #111827;
+    }
+    .testimonial-location {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    /* Footer */
+    footer {
+      background: #111827;
+      color: white;
+      padding: 3rem 0 1.5rem;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-section h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .footer-section ul {
+      list-style: none;
+    }
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+    .footer-section a {
+      color: #9ca3af;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-section a:hover {
+      color: white;
+    }
+    .footer-bottom {
+      border-top: 1px solid #374151;
+      padding-top: 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    /* Mobile menu */
+    .mobile-menu-toggle {
+      display: block;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #111827;
+      cursor: pointer;
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem 0;
+      border-top: 1px solid #e5e7eb;
+    }
+    .mobile-nav.active {
+      display: flex;
+    }
+    .mobile-nav a {
+      padding: 0.5rem 0;
+      color: #4b5563;
+    }
+
+    /* Simple responsiveness */
+    @media (min-width: 768px) {
+      nav { display: block; }
+      .mobile-menu-toggle { display: none; }
+      .services-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .features-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .testimonials-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .footer-content {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .hero h1 { font-size: 3.5rem; }
+      .hero p { font-size: 1.25rem; }
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .certs-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .section { padding: 4rem 0; }
+      .hero { padding: 5rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <span>24/7 emergencies • Same rates 7 days a week</span>
+      <a href="tel:02000000000" class="emergency-phone">
+        📞 0200 000 0000
+      </a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <img src="logo.png" alt="SW Builds & Plumbing" />
+        <span class="logo-text">SW Builds & Plumbing</span>
+      </a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+    </div>
+    <div class="container">
+      <nav class="mobile-nav" id="mobileNav">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1>Expert Plumbing, Refurbishments & Home Extensions</h1>
+      <p>
+        Specialists in plumbing services, bathroom refurbishments, kitchen refurbishments, loft conversions, 
+        and home extensions. With over 25 years of experience, SW Builds & Plumbing transforms homes across 
+        the Southwest with quality craftsmanship and reliable service.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="button-primary">Get a Quote</a>
+        <a href="tel:02000000000" class="hero-phone">📞 0200 000 0000</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>About SW Builds & Plumbing</h2>
+          <p>
+            Founded in 1999, SW Builds & Plumbing specializes in plumbing services, bathroom and kitchen 
+            refurbishments, loft conversions, and home extensions. We combine traditional craftsmanship 
+            with modern techniques to deliver exceptional results for every project.
+          </p>
+          <p>
+            Our team of qualified plumbers, builders, and specialists brings decades of combined experience 
+            to transform your home. Whether you need emergency plumbing repairs, a complete bathroom makeover, 
+            a modern kitchen refurbishment, a loft conversion to add space, or a home extension, we're 
+            committed to quality, reliability, and customer satisfaction.
+          </p>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-number">25+</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">5000+</span>
+              <span class="stat-label">Projects Completed</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">98%</span>
+              <span class="stat-label">Customer Satisfaction</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">24/7</span>
+              <span class="stat-label">Emergency Service</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="section certs-section">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 2rem;">Our Credentials</h2>
+      <div class="certs-grid">
+        <div class="cert-item">
+          <div style="font-size: 3rem; color: #0ea5e9;">✓</div>
+          <h4>Gas Safe Registered</h4>
+        </div>
+        <div class="cert-item">
+          <div style="font-size: 3rem; color: #0ea5e9;">✓</div>
+          <h4>NICEIC Certified</h4>
+        </div>
+        <div class="cert-item">
+          <div style="font-size: 3rem; color: #0ea5e9;">✓</div>
+          <h4>Fully Insured</h4>
+        </div>
+        <div class="cert-item">
+          <div style="font-size: 3rem; color: #0ea5e9;">✓</div>
+          <h4>CHAS Accredited</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="container">
+      <h2>Our Services</h2>
+      <p class="section-subtitle">
+        Specialized services in plumbing, bathroom refurbishments, kitchen refurbishments, loft conversions, and home extensions.
+      </p>
+      <div class="services-grid">
+        <a href="plumbing-services.html" class="service-card">
+          <h3>Plumbing Services</h3>
+          <p>Complete plumbing solutions: installations, repairs, maintenance, and 24/7 emergency callouts. Expert workmanship for all your plumbing needs including leaks, blockages, boiler repairs, and new installations.</p>
+        </a>
+        <a href="bathroom-refurb.html" class="service-card">
+          <h3>Bathroom Refurbishments</h3>
+          <p>Complete bathroom transformations from design to completion. Full refurbishments including tiling, plumbing, electrical work, and finishing. Create your dream bathroom with our professional team.</p>
+        </a>
+        <a href="kitchen-refurb.html" class="service-card">
+          <h3>Kitchen Refurbishments</h3>
+          <p>Complete kitchen makeovers including design, installation, plumbing, electrical work, and finishing touches. Transform your kitchen into a modern, functional space that suits your lifestyle.</p>
+        </a>
+        <a href="loft-conversions.html" class="service-card">
+          <h3>Loft Conversions</h3>
+          <p>Maximize your home's potential with a professional loft conversion. From initial planning and building regulations to construction and finishing, we create additional living space that adds value to your property.</p>
+        </a>
+        <a href="home-extensions.html" class="service-card">
+          <h3>Home Extensions</h3>
+          <p>Single and double-storey extensions to expand your living space. Full project management from planning permission to completion, including foundations, construction, plumbing, and finishing.</p>
+        </a>
+        <article class="service-card">
+          <h3>Heating & Boiler Services</h3>
+          <p>Boiler installation, servicing, and repairs. Central heating design and installation. Gas Safe registered engineers for all your heating needs, including new system installations and upgrades.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="section why-section">
+    <div class="container">
+      <h2>Why Choose SW Builds & Plumbing</h2>
+      <p class="section-subtitle">
+        Specialized expertise in plumbing, refurbishments, loft conversions, and extensions. Proven track record and commitment to excellence.
+      </p>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">✓</div>
+          <div class="feature-content">
+            <h3>25+ Years of Experience</h3>
+            <p>Established in 1999, we bring decades of expertise to every project. Our proven track record speaks for itself.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✓</div>
+          <div class="feature-content">
+            <h3>Fully Certified & Insured</h3>
+            <p>Gas Safe registered, NICEIC certified, CHAS accredited, and fully insured. All work carried out to industry standards.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✓</div>
+          <div class="feature-content">
+            <h3>Quality Craftsmanship</h3>
+            <p>We take pride in our work. Every project is completed to the highest standards with attention to detail and quality materials.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✓</div>
+          <div class="feature-content">
+            <h3>Transparent Pricing</h3>
+            <p>Clear, detailed quotes with no hidden costs. We provide honest pricing and work within agreed budgets.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✓</div>
+          <div class="feature-content">
+            <h3>Comprehensive Guarantees</h3>
+            <p>All our work comes with comprehensive guarantees. We stand behind our craftsmanship and fix any issues promptly.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✓</div>
+          <div class="feature-content">
+            <h3>Complete Project Management</h3>
+            <p>From initial consultation to final handover, we manage every aspect of your project for a stress-free experience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section testimonials-section" id="projects">
+    <div class="container">
+      <h2>Client Testimonials</h2>
+      <p class="section-subtitle">
+        Trusted by homeowners and businesses across the Southwest. Here's what our clients say about working with us.
+      </p>
+      <div class="testimonials-grid">
+        <article class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "SW Builds & Plumbing completed a full bathroom refurbishment for us. The quality of work was exceptional and the team was professional throughout. They handled all the plumbing, tiling, and finishing work perfectly. They kept us informed at every stage and finished on time and on budget. Couldn't be happier with the result."
+          </p>
+          <div class="testimonial-author">Sarah & Mark Johnson</div>
+          <div class="testimonial-location">Bristol - Bathroom Refurbishment</div>
+        </article>
+        <article class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "We've used SW Builds & Plumbing for multiple projects - from emergency plumbing repairs to a complete kitchen refurbishment and loft conversion. They're reliable, professional, and the standard of work is consistently excellent. They transformed our home and we couldn't be more pleased."
+          </p>
+          <div class="testimonial-author">James Thompson</div>
+          <div class="testimonial-location">Bath - Kitchen Refurb & Loft Conversion</div>
+        </article>
+        <article class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "We chose SW Builds & Plumbing for our home extension and they exceeded all expectations. From planning permission to completion, their project management was outstanding. The extension has transformed our living space and added significant value to our property. Highly recommended!"
+          </p>
+          <div class="testimonial-author">Emma Lawson</div>
+          <div class="testimonial-location">Swindon - Home Extension</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Our Services</h3>
+          <ul>
+            <li><a href="#services">Plumbing Services</a></li>
+            <li><a href="#services">Bathroom Refurbishments</a></li>
+            <li><a href="#services">Kitchen Refurbishments</a></li>
+            <li><a href="#services">Loft Conversions</a></li>
+            <li><a href="#services">Home Extensions</a></li>
+            <li><a href="#services">Heating & Boiler Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#projects">Our Projects</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <ul>
+            <li><strong>Phone:</strong> 0200 000 0000</li>
+            <li><strong>Email:</strong> info@swbuilds.co.uk</li>
+            <li><strong>Emergency:</strong> 24/7 Available</li>
+            <li><strong>Office Hours:</strong> Mon-Fri 8am-6pm</li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Certifications</h3>
+          <ul>
+            <li>Gas Safe Registered</li>
+            <li>NICEIC Certified</li>
+            <li>CHAS Accredited</li>
+            <li>Fully Insured</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 SW Builds & Plumbing. All rights reserved. | Established 1999 | Gas Safe Registered | NICEIC Certified</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    
+    if (mobileMenuToggle && mobileNav) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileNav.classList.toggle('active');
+      });
+    }
+
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // Close mobile menu if open
+          if (mobileNav) {
+            mobileNav.classList.remove('active');
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
